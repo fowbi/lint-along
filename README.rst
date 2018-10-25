@@ -43,7 +43,7 @@ Playlist
 
 The hits that make bland linting commits :sparkles:
 
-.. _Spotify: https://open.spotify.com/user/tobi.beernaert/playlist/7e3T6T18e4JVl01Vasgf3m?si=qvLwEknoQqSD5kMabwxoEA
+`Spotify <https://open.spotify.com/user/tobi.beernaert/playlist/7e3T6T18e4JVl01Vasgf3m?si=qvLwEknoQqSD5kMabwxoEA>`_
 
 Todo
 ====
