@@ -1,0 +1,2 @@
+class NoChangedFilesException(Exception):
+    pass

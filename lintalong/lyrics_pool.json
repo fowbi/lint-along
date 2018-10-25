@@ -1,0 +1,34 @@
+{
+  "pool": [
+    {
+      "lyrics": "Don't go breaking my Code",
+      "artist": "Elton John",
+      "yt_link": "https://www.youtube.com/watch?v=z0qW9P-uYfM"
+    },
+    {
+      "lyrics": "It smells like linting errors",
+      "artist": "Nirvana",
+      "yt_link": "https://www.youtube.com/watch?v=hTWKbfoikeg"
+    },
+    {
+      "lyrics": "We're no strangers to linting, you know the rules, so did I",
+      "artist": "Rick Astley",
+      "yt_link": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    },
+    {
+      "lyrics": "Lint on, with the force, don't stop, don't stop 'till you get enough",
+      "artist": "Michael Jackson",
+      "yt_link": "https://www.youtube.com/watch?v=yURRmWtbTbo"
+    },
+    {
+      "lyrics": "I was made for lintin' you",
+      "artist": "Kiss",
+      "yt_link": "https://www.youtube.com/watch?v=zlSFmotba2I"
+    },
+    {
+      "lyrics": "Owner of some linted code, much better, than owner of some broken code",
+      "artist": "Yes",
+      "yt_link": "https://www.youtube.com/watch?v=vpIduDaggVA"
+    }
+  ]
+}
