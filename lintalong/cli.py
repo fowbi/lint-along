@@ -53,7 +53,7 @@ def commit_linted_files(song: Song, repo: Repo):
 
     totals = commit.stats.total
 
-    result_message = "[{0} {1}] {2}\r\n{3} file changed, {4} insertions(+), {5} deletions(-)".format(
+    result_message = "[{0} {1}] {2}\r\n{3} file(s) changed, {4} insertions(+), {5} deletions(-)".format(
         repo.active_branch,
         str(commit),
         commit.summary,
@@ -61,8 +61,6 @@ def commit_linted_files(song: Song, repo: Repo):
         totals['insertions'],
         totals['deletions']
     )
-
-    # print(result_message)
 
     click.echo(message=result_message)
 
