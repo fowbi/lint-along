@@ -23,6 +23,11 @@ setup(
     author_email='dev@magier.com',
     description='lint-along',
     long_description=readme,
+    entry_points={
+        "console_scripts": [
+            'lint-along = lintalong.cli:cli'
+        ]
+    },
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
