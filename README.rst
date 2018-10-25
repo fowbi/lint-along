@@ -5,7 +5,7 @@ Lint and commit with an adjusted linting song as message.
 
 
 Why?
-====
+----
 
 I always make some stupid mistakes against the style guide, and because I never bothered to fix my half-baked linter
 setup for VIM and I apparently feel too smart for githooks, I always end up linting my code after I made it into a PR.
@@ -14,7 +14,7 @@ So instead of giving those commits a bland message I opted for some music inspir
 
 
 Installation
-=============
+------------
 
 pip:
 
@@ -29,7 +29,7 @@ From source:
     python setup.py install
 
 Usage
-=====
+-----
 
 Execute `lint-along` in a git enabled directory.
 
@@ -39,7 +39,7 @@ Execute `lint-along` in a git enabled directory.
 
 
 Playlist
-========
+--------
 
 The hits that make bland linting commits :sparkles:
 
