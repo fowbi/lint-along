@@ -5,8 +5,15 @@ import subprocess
 import pkg_resources
 from typing import Dict
 from git import Repo, Commit
-from lintalong.no_changed_files_exception import NoChangedFilesException
 from lintalong.song import Song
+
+
+class LinterDoesNotExistException(Exception):
+    pass
+
+
+class NoChangedFilesException(Exception):
+    pass
 
 
 class LintAlong:

@@ -6,8 +6,7 @@ import yaml
 from typing import Dict
 from pathlib import Path
 from git import Repo
-from lintalong.lint_along import LintAlong
-from lintalong.no_changed_files_exception import NoChangedFilesException
+from lintalong.lint_along import LintAlong, NoChangedFilesException
 
 
 @click.command()
