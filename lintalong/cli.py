@@ -7,7 +7,7 @@ import subprocess
 import yaml
 from array import array
 from pathlib import Path
-from git import Repo
+from git import Repo, Commit
 from lintalong.no_changed_files_exception import NoChangedFilesException
 from lintalong.song import Song
 
@@ -32,7 +32,20 @@ def cli():
         return
 
     song = fetch_random_song()
-    commit_linted_files(song=song, repo=repo)
+    commit = commit_linted_files(song=song, repo=repo)
+
+    totals = commit.stats.total
+
+    result_message = "[{0} {1}] {2}\r\n{3} file(s) changed, {4} insertions(+), {5} deletions(-)".format(
+        repo.active_branch,
+        str(commit),
+        commit.summary,
+        totals['files'],
+        totals['insertions'],
+        totals['deletions']
+    )
+
+    click.echo(message=result_message)
 
 
 def load_config():
@@ -66,22 +79,11 @@ def stage_linted_files(repo: Repo):
         index.add([file])
 
 
-def commit_linted_files(song: Song, repo: Repo):
+def commit_linted_files(song: Song, repo: Repo) -> Commit:
     message = ":musical_note: {0}\r\n\r\nBy {1} [{2}]".format(song.lyrics, song.artist, song.yt_link)
     commit = repo.index.commit(message=message)
 
-    totals = commit.stats.total
-
-    result_message = "[{0} {1}] {2}\r\n{3} file(s) changed, {4} insertions(+), {5} deletions(-)".format(
-        repo.active_branch,
-        str(commit),
-        commit.summary,
-        totals['files'],
-        totals['insertions'],
-        totals['deletions']
-    )
-
-    click.echo(message=result_message)
+    return commit
 
 
 def fetch_random_song() -> Song:
