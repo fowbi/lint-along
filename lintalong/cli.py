@@ -4,6 +4,9 @@ import os
 import pkg_resources
 import random
 import subprocess
+import yaml
+from array import array
+from pathlib import Path
 from git import Repo
 from lintalong.no_changed_files_exception import NoChangedFilesException
 from lintalong.song import Song
@@ -11,8 +14,10 @@ from lintalong.song import Song
 
 @click.command()
 def cli():
+    config = load_config()
+
     try:
-        run_linter()
+        run_linter(config['linter'])
     except subprocess.CalledProcessError as error:
         if error.returncode == 2:
             click.echo("Linting command \"{0}\" does not exist".format(" ".join(error.cmd)))
@@ -30,9 +35,23 @@ def cli():
     commit_linted_files(song=song, repo=repo)
 
 
-def run_linter():
+def load_config():
+    config = yaml.safe_load(pkg_resources.resource_string(__name__, 'config.yml'))
+
+    if Path("~/.lint-along.yml").is_file():
+        with open("~/.lint-along.yml", "r") as handle:
+            config.update(yaml.safe_load(handle.read()))
+
+    if Path(".lint-along.yml").is_file():
+        with open(".lint-along.yml", "r") as handle:
+            config.update(yaml.safe_load(handle.read()))
+
+    return config
+
+
+def run_linter(linter_cmd: array):
     with open(os.devnull, 'w') as FNULL:
-        subprocess.run(["make", "lint-fix"], stdout=FNULL, stderr=subprocess.STDOUT, check=True)
+        subprocess.run(linter_cmd, stdout=FNULL, stderr=subprocess.STDOUT, check=True)
 
 
 def stage_linted_files(repo: Repo):
