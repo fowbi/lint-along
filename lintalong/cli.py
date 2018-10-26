@@ -7,7 +7,7 @@ import subprocess
 import yaml
 from array import array
 from pathlib import Path
-from git import Repo, Commit
+from git import Repo, Commit, IndexFile
 from lintalong.no_changed_files_exception import NoChangedFilesException
 from lintalong.song import Song
 
@@ -32,7 +32,7 @@ def cli():
         return
 
     song = fetch_random_song()
-    commit = commit_linted_files(song=song, repo=repo)
+    commit = commit_linted_files(song=song, index=repo.index)
 
     totals = commit.stats.total
 
@@ -79,9 +79,9 @@ def stage_linted_files(repo: Repo):
         index.add([file])
 
 
-def commit_linted_files(song: Song, repo: Repo) -> Commit:
+def commit_linted_files(song: Song, index: IndexFile) -> Commit:
     message = ":musical_note: {0}\r\n\r\nBy {1} [{2}]".format(song.lyrics, song.artist, song.yt_link)
-    commit = repo.index.commit(message=message)
+    commit = index.commit(message=message)
 
     return commit
 
