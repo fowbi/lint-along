@@ -13,7 +13,7 @@ with open("LICENSE", 'r') as file:
 
 setup(
     name='lint-along',
-    version='0.0.1',
+    version='0.0.2',
     packages=find_packages(),
     url='https://github.com/fowbi/lint-along',
     license=license,
