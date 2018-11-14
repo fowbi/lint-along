@@ -9,7 +9,10 @@ from lintalong.song import Song
 
 
 class LinterDoesNotExistException(Exception):
-    pass
+    def __init__(self, message, command: Dict):
+        message = "Linting command \"{0}\" does not exist".format(" ".join(command))
+
+        super().__init(message)
 
 
 class NoChangedFilesException(Exception):
@@ -22,9 +25,13 @@ class LintAlong:
         self.repo = repo
 
     def lint(self):
-        # TODO :: try catch around this and return custom exception
-        with open(os.devnull, 'w') as FNULL:
-            subprocess.run(self.config['linter'], stdout=FNULL, stderr=subprocess.STDOUT, check=True)
+        try:
+            with open(os.devnull, 'w') as FNULL:
+                subprocess.run(self.config['linter'], stdout=FNULL, stderr=subprocess.STDOUT, check=True)
+        except subprocess.CalledProcessError as error:
+            if error.returncode == 2:
+                raise LinterDoesNotExistException(command=self.config['linter'])
+            raise error
 
     def stage_files(self):
         changed_files = self.repo.untracked_files

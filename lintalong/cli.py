@@ -6,7 +6,7 @@ import yaml
 from typing import Dict
 from pathlib import Path
 from git import Repo
-from lintalong.lint_along import LintAlong, NoChangedFilesException
+from lintalong.lint_along import LintAlong, NoChangedFilesException, LinterDoesNotExistException
 
 
 @click.command()
@@ -15,10 +15,9 @@ def cli():
 
     try:
         lint_along.lint()
-    except subprocess.CalledProcessError as error:
-        if error.returncode == 2:
-            click.echo("Linting command \"{0}\" does not exist".format(" ".join(error.cmd)))
-        raise error
+    except LinterDoesNotExistException as error:
+        click.echo(error)
+        return
 
     try:
         lint_along.stage_files()
